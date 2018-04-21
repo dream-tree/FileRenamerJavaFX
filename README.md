@@ -4,7 +4,7 @@ Simple file renamer application allowing user to rename set of files with desire
 
 FileRenamerJavaFX is made with JavaFX technology. It also uses some basic Spring Framework features (Spring Core) i.e, dependency injection (with annotation-based configuration).
 
-Project in progress. 
+Project in progress (but application compiles and works quite well:)
 
 TODO:
 - logging issues,
