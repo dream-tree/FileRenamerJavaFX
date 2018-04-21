@@ -85,38 +85,38 @@ public class MainView {
 				+ "Enjoy your photo collection!"); 
 		finalInfo.setTextAlignment(TextAlignment.CENTER);
 		
-	    userInputField = new TextField();
-	    userInputField.setMaxWidth(400);
-	    userInputField.setPromptText("Enter your filename schema");
-	    userInputField.setPrefColumnCount(15);   // maximum number of characters it can display at one time - doesn't work?
-	    userInputField.getText();                // the text data entered by a user into the text fields can be obtained by the getText() 
+		userInputField = new TextField();
+		userInputField.setMaxWidth(400);
+		userInputField.setPromptText("Enter your filename schema");
+		userInputField.setPrefColumnCount(15);   // maximum number of characters it can display at one time - doesn't work?
+		userInputField.getText();                // the text data entered by a user into the text fields can be obtained by the getText() 
 							
-	    GridPane gridWithRadioButtons = new GridPane();		
+		GridPane gridWithRadioButtons = new GridPane();		
 		toggleGroup = new ToggleGroup();	
 		RadioButton rb1 = new RadioButton();
 		RadioButton rb2 = new RadioButton();
 		rb1.setPrefWidth(220);
 		Label emptyLabelLeft1 = new Label();
 		emptyLabelLeft1.setPrefWidth(280);
-    	gridWithRadioButtons.add(emptyLabelLeft1, 0, 0);
-    	gridWithRadioButtons.add(rb1, 1, 0);
-    	gridWithRadioButtons.add(rb2, 2, 0);
+		gridWithRadioButtons.add(emptyLabelLeft1, 0, 0);
+		gridWithRadioButtons.add(rb1, 1, 0);
+		gridWithRadioButtons.add(rb2, 2, 0);
 		rb1.setUserData(0);
 		rb2.setUserData(1);
-    	rb1.setToggleGroup(toggleGroup);
-    	rb2.setToggleGroup(toggleGroup);
-    	rb1.setVisible(true);
-    	rb2.setVisible(true);  
+		rb1.setToggleGroup(toggleGroup);
+		rb2.setToggleGroup(toggleGroup);
+		rb1.setVisible(true);
+		rb2.setVisible(true);  
         
 		GridPane gridWithButtonDespription = new GridPane();
 		Label emptyLabelLeft2 = new Label();
 		emptyLabelLeft2.setPrefWidth(200);
-    	Label numberingTextLeft = new Label("start numbering from left");
-    	Label numberingTextRight = new Label("start numbering from right");
-    	numberingTextLeft.setPrefWidth(220);
-    	gridWithButtonDespription.add(emptyLabelLeft2, 0, 1);
-    	gridWithButtonDespription.add(numberingTextLeft, 1, 1);
-    	gridWithButtonDespription.add(numberingTextRight, 2, 1);
+		Label numberingTextLeft = new Label("start numbering from left");
+		Label numberingTextRight = new Label("start numbering from right");
+		numberingTextLeft.setPrefWidth(220);
+		gridWithButtonDespription.add(emptyLabelLeft2, 0, 1);
+		gridWithButtonDespription.add(numberingTextLeft, 1, 1);
+		gridWithButtonDespription.add(numberingTextRight, 2, 1);
 	
 		renameButton = new Button("Rename");
 		renameButton.setPrefSize(150, 50);
@@ -129,7 +129,7 @@ public class MainView {
 	    GridPane.setConstraints(finalInfo, 0, 14);
 	    GridPane.setConstraints(userInputField, 0, 15);
 	    GridPane.setConstraints(gridWithRadioButtons, 0, 17);
-	    GridPane.setConstraints(gridWithButtonDespription, 0, 18);
+		GridPane.setConstraints(gridWithButtonDespription, 0, 18);
 	    GridPane.setConstraints(renameButton, 0, 21);
 	    
 	    GridPane.setHalignment(selectFilesButton, HPos.CENTER);	    
