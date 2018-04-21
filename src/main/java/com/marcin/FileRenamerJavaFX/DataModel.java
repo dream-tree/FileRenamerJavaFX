@@ -31,7 +31,7 @@ public class DataModel {
 				succeedFlag = renameOption1(loadedFiles, input);
 				if(succeedFlag) {
 					refreshFilesList();	
-					// metoda renameTo() przy błędzie, np. użyciu ?, zwraca false, nie wyrzuca wyjątku!!
+					// metoda renameTo() zwraca false, nie wyrzuca wyjątku!!
 				} else {
 					throw new Exception();
 				}
@@ -51,23 +51,6 @@ public class DataModel {
 		 }
 	}
 	
-/*	public void renameOption1(List<File> filesList, String input) {
-		 for(int i = 0; i < filesList.size(); i++) {					 
-			 String[] splitted = filesList.get(i).toString().split("\\.");  // dowolna litera zero lub więcej razy
-			 System.out.println(Arrays.toString(splitted));
-	         StringBuilder sb = new StringBuilder(splitted[0]);
-	        for(int j = 0; j < splitted.length-1; j++) {
-				 sb.append(splitted[j]+".");
-			 }  
-			 sb.append("_");
-			 sb.append(i+1);
-			 sb.append(".");
-			 sb.append(splitted[1]);
-			 System.out.println(sb.toString());
-			 filesList.get(i).renameTo(new File(sb.toString()));
-		 } 
-	}*/
-	
 	public boolean renameOption1(List<File> filesList, String input) throws Exception {
 		try {
 			for(int i = 0; i < filesList.size(); i++) {
@@ -80,7 +63,6 @@ public class DataModel {
 				sb.append(input);
 				sb.append(".");
 				sb.append(fileExtension[fileExtension.length-1]);
-	//			filesList.get(i).renameTo(new File(sb.toString()));
 				File s = new File(sb.toString());
 				succeedFlag = filesList.get(i).renameTo(s);
 				// if user wants to rename same pictures in same app run i other way, app has to remember
@@ -108,7 +90,6 @@ public class DataModel {
 				sb.append(String.format("%04d", i+1));
 				sb.append(".");
 				sb.append(fileExtension[fileExtension.length-1]);
-	//			filesList.get(i).renameTo(new File(sb.toString()));
 				File s = new File(sb.toString());
 				succeedFlag = filesList.get(i).renameTo(s);
 				// if user wants to rename same pictures in same app run i other way, app has to remember
@@ -117,7 +98,7 @@ public class DataModel {
 			}
 		} catch (Exception e) { 
 			// TODO: logger - error in renaming files
-			// TODO ALERT
+			// TODO: ALERT
 			e.getMessage();
 			throw e;		
 		}
@@ -142,7 +123,4 @@ public class DataModel {
 		List<File> temp = new ArrayList<>(renamedFiles);
 		fileLoader.setFilesList(temp);
 	}
-	
 }
-	
-

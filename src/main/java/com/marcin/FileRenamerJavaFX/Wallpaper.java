@@ -18,8 +18,6 @@ import javafx.scene.layout.GridPane;
 
 public class Wallpaper {
 		
-//	private BackgroundImage backgroundImage;
-	
 	@Autowired
 	public Wallpaper() {
 	}
@@ -38,15 +36,4 @@ public class Wallpaper {
 		        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		return backgroundImage;
 	}
-	
-	
-	
-/*	*//**
-	 * @return the backgroundImage
-	 *//*
-	public BackgroundImage getBackgroundImage() {
-		return backgroundImage;
-	}*/
-	
-	
 }

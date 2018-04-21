@@ -48,14 +48,11 @@ public class MainViewController {
 					try {
 						model.processInput(input);	
 					} catch (Exception e) {
-				//		e.printStackTrace();   unnecessary actions, earlier all logged
+				//		e.printStackTrace();   unnecessary action, earlier all logged
 						mainView.getAlerts().renamingErrorAlertDialog();
 					}
-					
 				}
 			}
 		});
 	}
-
-
 }

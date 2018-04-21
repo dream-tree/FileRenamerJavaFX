@@ -22,7 +22,7 @@ public class StartApp extends Application {
 	public void start(Stage primaryStage) {
 		StartApp.primaryStage = primaryStage;
 		try {
-			ApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
+			AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
 			MainView view = context.getBean(MainView.class);		
 			view.initView(primaryStage);	
 			FileLoader fileLoader = context.getBean(FileLoaderImpl.class);
@@ -31,6 +31,7 @@ public class StartApp extends Application {
 			mainController.initMainController();	
 			ToggleController toggleController = context.getBean(ToggleController.class);
 			toggleController.initToggleController();
+			context.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

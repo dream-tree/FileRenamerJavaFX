@@ -219,6 +219,4 @@ public class MainView {
 	public GridPane getGrid() {
 		return grid;
 	}
-	
-	
 }

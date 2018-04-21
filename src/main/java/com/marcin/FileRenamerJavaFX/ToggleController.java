@@ -16,7 +16,6 @@ public class ToggleController {
 	public ToggleController(MainView mainView, DataModel model) {
 		this.mainView = mainView;
 		this.model = model;
-
 	}
 	
 	public void initToggleController() {

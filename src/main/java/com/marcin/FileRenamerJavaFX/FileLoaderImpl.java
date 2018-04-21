@@ -36,10 +36,8 @@ public class FileLoaderImpl implements FileLoader {
 				// user clicked selectingFilesButton again and nothing was selected in previous click
 				} catch (Exception e) {
 					// TODO: logger
-					System.out.println("selectingFilesButton info: no selected files.");
 				}
 				 filesList = fileChooser.showOpenMultipleDialog(StartApp.getPrimaryStage());    // showOpenDialog()	 
-				 System.out.println("1 " + filesList);
 				 if(filesList == null || filesList.isEmpty()) {
 					mainView.getAlerts().noFileSelectedAlertDialog();
 				 }
