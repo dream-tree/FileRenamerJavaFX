@@ -22,6 +22,11 @@ public class BeanConfig {
 		return new Stage();
 	}*/
 	
+	@Bean(name="backgroundPic")
+	public Wallpaper setBackgroundImage() {
+		return new Wallpaper();
+	}
+	
 	@Bean(name="alerts")
 	public AlertDialogs setAlertDialogs() {
 		return new AlertDialogs();
@@ -29,7 +34,7 @@ public class BeanConfig {
 	
 	@Bean(name="mainView")
 	public MainView createMainView() {
-		return new MainView(setAlertDialogs());
+		return new MainView(/*setAlertDialogs()*/);
 	}
 	
 	@Bean(name="fileLoaderImplArrayList")
@@ -37,5 +42,12 @@ public class BeanConfig {
 		return new FileLoaderImpl(createMainView(), new ArrayList<File>());
 	}
 	
+	/*@Bean(name="toggles")
+	public Toggle setAlertDialogs() {
+		return new AlertDialogs();
+	}
+	*/
+	
+
 
 }

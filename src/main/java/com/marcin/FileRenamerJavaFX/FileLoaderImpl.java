@@ -1,15 +1,14 @@
 package com.marcin.FileRenamerJavaFX;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.ToDoubleBiFunction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class FileLoaderImpl implements FileLoader {
 	
@@ -28,14 +27,23 @@ public class FileLoaderImpl implements FileLoader {
 		
 		mainView.getSearchFilesButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {			
-				// it is possible to use instance field Stage in this class instead of a static method - 
-				// but it would be another instance than in JavaFX start() method;
-				// it is impossible to inject JavaFX instance of Stage object anywhere
+			public void handle(ActionEvent event) {	
+				try {
+					// clearing previous user choices
+					if(filesList.size() != 0) {
+						filesList.clear();
+					}
+				// user clicked selectingFilesButton again and nothing was selected in previous click
+				} catch (Exception e) {
+					// TODO: logger
+					System.out.println("selectingFilesButton info: no selected files.");
+				}
 				 filesList = fileChooser.showOpenMultipleDialog(StartApp.getPrimaryStage());    // showOpenDialog()	 
+				 System.out.println("1 " + filesList);
 				 if(filesList == null || filesList.isEmpty()) {
 					mainView.getAlerts().noFileSelectedAlertDialog();
-				}			
+				 }
+				 System.out.println("2 " + filesList);
 	        }
 	    });
 	}
@@ -46,11 +54,11 @@ public class FileLoaderImpl implements FileLoader {
 	public List<File> getFilesList() {
 		return filesList;
 	}
-/*
-	*//**
+
+	/**
 	 * @param filesList the filesList to set
-	 *//*
+	 */
 	public void setFilesList(List<File> filesList) {
 		this.filesList = filesList;
-	}*/
+	}
 }

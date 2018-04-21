@@ -15,5 +15,7 @@ import javafx.stage.Stage;
 public interface FileLoader {
 
 	public void loadFiles();
+	//TODO default?
 	public List<File> getFilesList();
+	public void setFilesList(List<File> filesList);
 }

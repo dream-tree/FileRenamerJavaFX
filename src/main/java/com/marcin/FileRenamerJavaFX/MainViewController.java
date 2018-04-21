@@ -17,13 +17,13 @@ public class MainViewController {
 	private DataModel model;
 	private FileLoader fileLoader;
 	private List<File> filesList;
-	private int optionFlag = 1;
 	
 	@Autowired
 	public MainViewController(MainView mainView, DataModel model, FileLoader fileLoader) {
 		this.mainView = mainView;
 		this.model = model;
 		this.fileLoader = fileLoader;
+		System.out.println("1: "+ fileLoader.getFilesList());
 	}
 	
 	public void initMainController() {
@@ -31,12 +31,28 @@ public class MainViewController {
 			@Override
 			public void handle(ActionEvent event) {
 				String input = mainView.getUserInputField().getText();
-				if(input != null && !input.isEmpty()) {
-					model.processInput(input, 2);	
-				} else {
-					mainView.getAlerts().noUserInputAlertDialog();
+				try {
+					filesList = fileLoader.getFilesList();
+				} catch (Exception e) {
+					// TODO: logger
+					System.out.println("renameButton info: no files in List<File>");
 				}
-			
+				if(input == null || input.isEmpty()) {
+					mainView.getAlerts().noUserInputAlertDialog();
+				} else if(filesList == null || filesList.isEmpty()) {
+					mainView.getAlerts().noFileSelectedAlertDialog();
+				} else if(input.length() > 251) {
+					mainView.getAlerts().excededInputLengthAlertDialog();
+				}
+				else {
+					try {
+						model.processInput(input);	
+					} catch (Exception e) {
+				//		e.printStackTrace();   unnecessary actions, earlier all logged
+						mainView.getAlerts().renamingErrorAlertDialog();
+					}
+					
+				}
 			}
 		});
 	}
