@@ -124,20 +124,20 @@ public class MainView {
 		renameButton.setFont(Font.font("ARIAL", 16.0));
 		renameButton.setAlignment(Pos.CENTER);
 			    
-	    GridPane.setConstraints(menuBar, 0, 0);
-	    GridPane.setConstraints(selectFilesButton, 0, 13);
-	    GridPane.setConstraints(finalInfo, 0, 14);
-	    GridPane.setConstraints(userInputField, 0, 15);
-	    GridPane.setConstraints(gridWithRadioButtons, 0, 17);
+		GridPane.setConstraints(menuBar, 0, 0);
+		GridPane.setConstraints(selectFilesButton, 0, 13);
+		GridPane.setConstraints(finalInfo, 0, 14);
+		GridPane.setConstraints(userInputField, 0, 15);
+		GridPane.setConstraints(gridWithRadioButtons, 0, 17);
 		GridPane.setConstraints(gridWithButtonDespription, 0, 18);
-	    GridPane.setConstraints(renameButton, 0, 21);
+		GridPane.setConstraints(renameButton, 0, 21);
 	    
-	    GridPane.setHalignment(selectFilesButton, HPos.CENTER);	    
-	    GridPane.setHalignment(finalInfo, HPos.CENTER);    
-	    GridPane.setHalignment(userInputField, HPos.CENTER);   
-	    GridPane.setHalignment(gridWithRadioButtons, HPos.CENTER);
+		GridPane.setHalignment(selectFilesButton, HPos.CENTER);	    
+		GridPane.setHalignment(finalInfo, HPos.CENTER);    
+		GridPane.setHalignment(userInputField, HPos.CENTER);   
+		GridPane.setHalignment(gridWithRadioButtons, HPos.CENTER);
 		GridPane.setHalignment(gridWithButtonDespription, HPos.CENTER); 
-	    GridPane.setHalignment(renameButton, HPos.CENTER);
+		GridPane.setHalignment(renameButton, HPos.CENTER);
 	    
 		grid.getChildren().addAll(menuBar, selectFilesButton, finalInfo, userInputField, gridWithRadioButtons, 
 				gridWithButtonDespription, renameButton);
