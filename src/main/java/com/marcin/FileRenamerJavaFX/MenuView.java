@@ -74,10 +74,10 @@ public class MenuView {
 	//	alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 		alert.setX(StartApp.getPrimaryStage().getX() + 125);
 		alert.setY(StartApp.getPrimaryStage().getY() + 100);
-        alert.setTitle("---User info---");	 
-        alert.setHeaderText(null);
-        alert.setContentText(userInfo);	 
-        alert.showAndWait();
+		alert.setTitle("---User info---");	 
+		alert.setHeaderText(null);
+		alert.setContentText(userInfo);	 
+		alert.showAndWait();
 	}
 
 	/**
@@ -87,10 +87,10 @@ public class MenuView {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setX(StartApp.getPrimaryStage().getX() + 200);
 		alert.setY(StartApp.getPrimaryStage().getY() + 200);
-        alert.setTitle("---About---");	 
-        alert.setHeaderText(null);
-        alert.setContentText(aboutInfo);	 
-        alert.showAndWait();
+		alert.setTitle("---About---");	 
+		alert.setHeaderText(null);
+		alert.setContentText(aboutInfo);	 
+		alert.showAndWait();
 	}
 	
 	/**
