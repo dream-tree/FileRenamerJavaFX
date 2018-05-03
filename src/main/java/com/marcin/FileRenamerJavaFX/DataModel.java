@@ -7,51 +7,78 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Data model for application.
+ * 
+ * @author dream-tree
+ * @version 1.00, April 2018
+ */
 @Service
 public class DataModel {
 	
 	@Autowired	
 	private FileLoader fileLoader;
-	private int optionFlag = -1;
 	private List<File> loadedFiles;
 	private List<File> renamedFiles = new ArrayList<>();
+	
+	/**
+	 * One of 2 possible renaming options as detailed here: {@link ToggleController#initToggleController()} 
+	 */
+	private int renamingOption = 0;
+	
+	/**
+	 * Indicates if the file renaming process was successful.
+	 */
 	boolean succeedFlag;
 
+	/**
+	 * Constructs the DataModel.
+	 */
 	public DataModel() {
 	}
 	
-	public void processInput(String input) throws Exception {
+	/**
+	 * Checks out if the list of files chosen by user is not empty
+	 * and redirects renaming process to the appropriate method using optionFlag variable.
+	 * @param input user schema for renaming selected files
+	 * @throws Exception exception in file renaming process
+	 * @return true if renaming process was successful, false otherwise
+	 */
+	public boolean processInput(String input) throws RenamingException {
 		loadedFiles = fileLoader.getFilesList();
 		renamedFiles.clear();
 		if(loadedFiles != null) {
-			if(optionFlag == -1) {
-				// TODO: alert dialog
-			} else if(optionFlag == 0) {
-				System.out.println("nana1: " + loadedFiles);
+			if(renamingOption == 0) {
+				succeedFlag = renameOption0(loadedFiles, input);
+				if(succeedFlag) {
+					refreshFilesList();	
+					return true;
+				} else {
+					throw new RenamingException("Error in renameOption0() method.");
+				}
+			} else if(renamingOption == 1) {
 				succeedFlag = renameOption1(loadedFiles, input);
 				if(succeedFlag) {
-					refreshFilesList();	
-					// metoda renameTo() zwraca false, nie wyrzuca wyjątku!!
+					refreshFilesList();
+					return true;
 				} else {
-					throw new Exception();
+					throw new RenamingException("Error in renamingOption1() method.");
 				}
-			} else if(optionFlag == 1) {
-				System.out.println("nana3: " + loadedFiles);
-				succeedFlag = renameOption2(loadedFiles, input);
-				if(succeedFlag) {
-					refreshFilesList();	
-				} else {
-					throw new Exception();
-				}
-			} else {
-				
-			}
+			} 
 		 } else {
-			 //TODO: alert
+				return false;
 		 }
+		return false;
 	}
 	
-	public boolean renameOption1(List<File> filesList, String input) throws Exception {
+	/**
+	 * Renames files in the way chosen by user i.e., numbering from the left hand side.
+	 * @param filesList list of files selected by user for renaming process
+	 * @param input user schema for renaming selected files
+	 * @return true if renaming process was successful, false otherwise
+	 * @throws Exception exception in file renaming process
+	 */
+	public boolean renameOption0(List<File> filesList, String input) {
 		try {
 			for(int i = 0; i < filesList.size(); i++) {
 				String[] pathWithoutFileNameAndExt = filesList.get(i).toString().split("\\\\([^\\\\]+)$"); 
@@ -65,8 +92,8 @@ public class DataModel {
 				sb.append(fileExtension[fileExtension.length-1]);
 				File s = new File(sb.toString());
 				succeedFlag = filesList.get(i).renameTo(s);
-				// if user wants to rename same pictures in same app run i other way, app has to remember
-				// recently filename changes to files
+				// if user wants to rename the same picture set in the same app session in the other way, 
+				// application has to remember recently filename changes
 				renamedFiles.add(s);
 				}
 		} catch (Exception e) { 
@@ -78,7 +105,14 @@ public class DataModel {
 	return succeedFlag;
 	}
 	
-	public boolean renameOption2(List<File> filesList, String input) throws Exception {
+	/**
+	 * Renames files in the way chosen by user i.e., numbering from the right hand side.
+	 * @param filesList list of files selected by user for renaming process
+	 * @param input user schema for renaming selected files
+	 * @return true if renaming process was successful, false otherwise
+	 * @throws Exception exception in file renaming process
+	 */
+	public boolean renameOption1(List<File> filesList, String input) {
 		try {
 			for(int i = 0; i < filesList.size(); i++) {
 				String[] pathWithoutFileNameAndExt = filesList.get(i).toString().split("\\\\([^\\\\]+)$"); 
@@ -92,8 +126,8 @@ public class DataModel {
 				sb.append(fileExtension[fileExtension.length-1]);
 				File s = new File(sb.toString());
 				succeedFlag = filesList.get(i).renameTo(s);
-				// if user wants to rename same pictures in same app run i other way, app has to remember
-				// recently filename changes to files
+				// if user wants to rename the same picture set in the same app session in the other way, 
+				// application has to remember recently filename changes
 				renamedFiles.add(s);
 			}
 		} catch (Exception e) { 
@@ -105,22 +139,27 @@ public class DataModel {
 	return succeedFlag;
 	}
 
-	/**
+/*	*//**
 	 * @return the optionFlag
-	 */
-	public int getOptionFlag() {
-		return optionFlag;
-	}
+	 *//*
+	public int getRenamingOption() {
+		return renamingOption;
+	}*/
 
 	/**
 	 * @param optionFlag the optionFlag to set
 	 */
-	public void setOptionFlag(int optionFlag) {
-		this.optionFlag = optionFlag;
+	public void setRenamingOption(int optionFlag) {
+		this.renamingOption = optionFlag;
 	}
 	
+	/**
+	 * Reloads the list of files after the successful renaming process.
+	 * It allows user to rename loaded files again in a different way 
+	 * without necessity of choosing the same file set again.
+	 */
 	public void refreshFilesList() {
-		List<File> temp = new ArrayList<>(renamedFiles);
-		fileLoader.setFilesList(temp);
+		List<File> renamedFilesList = new ArrayList<>(renamedFiles);
+		fileLoader.updateFilesList(renamedFilesList);
 	}
 }

@@ -6,6 +6,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -15,13 +16,26 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 
-
+/**
+ * Initialization of background picture for the application main window.
+ * 
+ * @author dream-tree
+ * @version 1.00, April 2018
+ */
+@Component
 public class Wallpaper {
-		
+	
+	/**
+	* Constructs the Wallpaper.
+	*/
 	@Autowired
 	public Wallpaper() {
 	}
-
+	
+	/**
+	 * Loads background picture (wallpaper) for the main window.
+	 * @return BackgroundImage object to be set as Background in the main window
+	 */
 	public BackgroundImage setWallpaper() {
 		Path path = FileSystems.getDefault().getPath("src/main/java/com/marcin/FileRenamerJavaFX/wallpaper3d.jpg");			
 		FileInputStream inputstream = null;

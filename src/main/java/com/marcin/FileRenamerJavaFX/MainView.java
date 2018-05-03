@@ -1,12 +1,11 @@
 package com.marcin.FileRenamerJavaFX;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
+import java.io.File;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +13,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -23,18 +23,21 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+/**
+ * The main window for the application.
+ * 
+ * @author dream-tree
+ * @version 1.00, April 2018
+ */
+@Component
 public class MainView {
 	private GridPane grid;
 	private Button selectFilesButton;
@@ -42,13 +45,19 @@ public class MainView {
 	private TextField userInputField;
 	private Label finalInfo;
 	private ToggleGroup toggleGroup;
-	private MenuBar menuBar;
+	@Autowired
+	private MenuView menuBarView;
 	@Autowired
 	private AlertDialogs alerts;
 	@Autowired
 	private Wallpaper wallpaper;
+	@Value("${stage.Title}")
+	private String mainStageTitle;
 	
-	@Autowired                             // unnecessary if 1 constructor only
+	/**
+	 * Constructs the MainView.
+	 */
+	@Autowired                             
 	public MainView() {
 		this.grid = new GridPane();	
 		grid.setPadding(new Insets(0, 0, 20, 0));
@@ -56,19 +65,31 @@ public class MainView {
 		grid.setVgap(10);
 		grid.setHgap(10);
 		grid.setPrefSize(800, 600);
-//		grid.setGridLinesVisible(true);
+	//	grid.setGridLinesVisible(true);
 	}
 
+	/**
+	 * Constructs the primary Stage and sets the background picture for the main window.
+	 * @param primaryStage primary Stage
+	 */
 	public void initView(Stage primaryStage) {				
 		Scene scene = new Scene(grid, 800, 600, Color.RED);
 		grid.setBackground(new Background(wallpaper.setWallpaper()));
+		primaryStage.setTitle(mainStageTitle);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		createContent(scene);
 	}
 
+	/**
+	 * Creates the content of the application main window.
+	 * @param scene the container for all content in a scene graph
+	 */
 	public void createContent(Scene scene) {			
-		MenuBar menuBar = addMenuBar();
+		MenuBar mb = menuBarView.addMenuBar();	
+		mb.setPrefSize(800.0, 30.0);
+		mb.getMenus().addAll(menuBarView.getMenuUserInfo(), menuBarView.getMenuAbout(), menuBarView.getMenuExit());	
+		
 		selectFilesButton = new Button("Search for files");
 		selectFilesButton.setPrefSize(150, 50);
 		selectFilesButton.setDefaultButton(true);
@@ -93,20 +114,21 @@ public class MainView {
 							
 		GridPane gridWithRadioButtons = new GridPane();		
 		toggleGroup = new ToggleGroup();	
-		RadioButton rb1 = new RadioButton();
-		RadioButton rb2 = new RadioButton();
-		rb1.setPrefWidth(220);
+		RadioButton radioButton1 = new RadioButton();
+		RadioButton radioButton2 = new RadioButton();
+		radioButton1.setPrefWidth(220);
 		Label emptyLabelLeft1 = new Label();
 		emptyLabelLeft1.setPrefWidth(280);
 		gridWithRadioButtons.add(emptyLabelLeft1, 0, 0);
-		gridWithRadioButtons.add(rb1, 1, 0);
-		gridWithRadioButtons.add(rb2, 2, 0);
-		rb1.setUserData(0);
-		rb2.setUserData(1);
-		rb1.setToggleGroup(toggleGroup);
-		rb2.setToggleGroup(toggleGroup);
-		rb1.setVisible(true);
-		rb2.setVisible(true);  
+		gridWithRadioButtons.add(radioButton1, 1, 0);
+		gridWithRadioButtons.add(radioButton2, 2, 0);
+		radioButton1.setUserData(0);
+		radioButton2.setUserData(1);
+		radioButton1.setToggleGroup(toggleGroup);
+		radioButton2.setToggleGroup(toggleGroup);
+		radioButton1.setVisible(true);
+		radioButton2.setVisible(true);  
+		toggleGroup.selectToggle(radioButton1);
         
 		GridPane gridWithButtonDespription = new GridPane();
 		Label emptyLabelLeft2 = new Label();
@@ -123,8 +145,8 @@ public class MainView {
 		renameButton.setDefaultButton(true);
 		renameButton.setFont(Font.font("ARIAL", 16.0));
 		renameButton.setAlignment(Pos.CENTER);
-			    
-		GridPane.setConstraints(menuBar, 0, 0);
+			    	
+		GridPane.setConstraints(mb, 0, 0);
 		GridPane.setConstraints(selectFilesButton, 0, 13);
 		GridPane.setConstraints(finalInfo, 0, 14);
 		GridPane.setConstraints(userInputField, 0, 15);
@@ -138,33 +160,43 @@ public class MainView {
 		GridPane.setHalignment(gridWithRadioButtons, HPos.CENTER);
 		GridPane.setHalignment(gridWithButtonDespription, HPos.CENTER); 
 		GridPane.setHalignment(renameButton, HPos.CENTER);
-	    
-		grid.getChildren().addAll(menuBar, selectFilesButton, finalInfo, userInputField, gridWithRadioButtons, 
+		
+		
+		grid.getChildren().addAll(mb, selectFilesButton, finalInfo, userInputField, gridWithRadioButtons, 
 				gridWithButtonDespription, renameButton);
 	}
 
+	/**
+	 * Adding menu bar.
+	 * @return the menu bar for application main window
+	 */
 	public MenuBar addMenuBar() {		
-		menuBar = new MenuBar();
+		MenuBar menuBar = new MenuBar();
 		menuBar.setPrefSize(800.0, 30.0);
 		final Menu menuUser = new Menu("User info");
 		final Menu menuAbout = new Menu("About");
 		final Menu menuExit = new Menu("Exit");
 		
-		MenuItem menuFileItem1 = new MenuItem("User info");
-		menuFileItem1.setOnAction(new EventHandler<ActionEvent>() {
+		MenuItem menuUserInfo = new MenuItem("User info");
+		menuUserInfo.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override 
 		    public void handle(ActionEvent e) {
-		        System.out.println("Opening Database Connection...");
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setX(StartApp.getPrimaryStage().getX() + 200);
+				alert.setY(StartApp.getPrimaryStage().getY() + 200);
+		        alert.setTitle("---User info---");	 
+		        alert.setHeaderText(null);
+		        alert.setContentText("SUCCESS!");	 
+		        alert.showAndWait();
 		    }
 		});		
 		
-		MenuItem menuFileItem2 = new MenuItem("About");
-		menuFileItem2.setOnAction(t -> System.out.println("unavailable"));		
-		MenuItem menuFileItem3 = new MenuItem("Exit");
-		menuFileItem3.setOnAction(t -> System.exit(0));		
-		menuUser.getItems().addAll(menuFileItem1, menuFileItem2, new SeparatorMenuItem(), menuFileItem3);			
+		MenuItem menuUserAbout = new MenuItem("About");
+		menuUserAbout.setOnAction(t -> System.out.println("unavailable"));		
+		MenuItem menuUserExit = new MenuItem("Exit");
+		menuUserExit.setOnAction(t -> System.exit(0));		
+		menuUser.getItems().addAll(menuUserInfo, menuUserAbout, new SeparatorMenuItem(), menuUserExit);			
 				
-	//	menuFileItem1.setGraphic(new ImageView(new Image("flower.png")));
 
 		menuBar.getMenus().addAll(menuUser, menuAbout, menuExit);	
 		
@@ -172,14 +204,14 @@ public class MainView {
 	}
 	
 	/**
-	 * @return the openFileDialog
+	 * @return the searchFilesButton
 	 */
 	public Button getSearchFilesButton() {
 		return selectFilesButton;
 	}
 
 	/**
-	 * @return the searchBar
+	 * @return the userInputField
 	 */
 	public TextField getUserInputField() {
 		return userInputField;
@@ -209,8 +241,8 @@ public class MainView {
 	/**
 	 * @return the menuBar
 	 */
-	public MenuBar getMenuBar() {
-		return menuBar;
+	public MenuView getMenuBarView() {
+		return menuBarView;
 	}
 
 	/**

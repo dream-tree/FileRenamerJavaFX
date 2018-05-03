@@ -1,62 +1,57 @@
 package com.marcin.FileRenamerJavaFX;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.ToDoubleBiFunction;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
 
+/**
+ * Class responsible for loading files chosen by user.
+ * Files are selected using FileChoser dialog.
+ * 
+ * @author dream-tree
+ * @version 1.00, April 2018
+ */
+@Component
 public class FileLoaderImpl implements FileLoader {
 	
-	private MainView mainView;
 	private List<File> filesList;
 	
+	/** 
+	 * Constructs the FileLoaderImpl.
+	 */
 	@Autowired   
-	public FileLoaderImpl(MainView mainView, List<File> filesList) {	
-		this.mainView = mainView;
-		this.filesList = filesList;
+	public FileLoaderImpl() {			
 	}
 		
+	/**
+	 * {@inheritDoc}
+	 */
 	public void loadFiles() {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Selecting files");
-		
-		mainView.getSearchFilesButton().setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {	
-				try {
-					// clearing previous user choices
-					if(filesList.size() != 0) {
-						filesList.clear();
-					}
-				// user clicked selectingFilesButton again and nothing was selected in previous click
-				} catch (Exception e) {
-					// TODO: logger
-				}
-				 filesList = fileChooser.showOpenMultipleDialog(StartApp.getPrimaryStage());    // showOpenDialog()	 
-				 if(filesList == null || filesList.isEmpty()) {
-					mainView.getAlerts().noFileSelectedAlertDialog();
-				 }
-				 System.out.println("2 " + filesList);
-	        }
-	    });
+		fileChooser.setTitle("Selecting files..");
+		// initializing list of files or clearing list if user takes another action in the same session
+		filesList = fileChooser.showOpenMultipleDialog(StartApp.getPrimaryStage());
 	}
 
 	/**
-	 * @return the filesList
+	 * {@inheritDoc}
 	 */
 	public List<File> getFilesList() {
 		return filesList;
 	}
 
 	/**
-	 * @param filesList the filesList to set
+	 * {@inheritDoc}
 	 */
-	public void setFilesList(List<File> filesList) {
+	public void updateFilesList(List<File> filesList) {
 		this.filesList = filesList;
 	}
 }
