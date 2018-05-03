@@ -97,18 +97,19 @@ public class MainView {
 		selectFilesButton.setAlignment(Pos.CENTER);
 		
 		finalInfo = new Label();
-		finalInfo.setPrefSize(400, 70);
+		finalInfo.setPrefSize(400, 90);
 		finalInfo.setFont(Font.font("ARIAL", 16));
 		finalInfo.setAlignment(Pos.TOP_CENTER);
 		String currentYear = LocalDate.now().toString().substring(0, 4);
-		finalInfo.setText("Set your file name schema, e.g. Summer2018" + currentYear + ".\n"
-				+ "Choose numbering position.\n"
-				+ "Enjoy your photo collection!"); 
+		finalInfo.setText("Choose the way you want to name your set of files,\n"
+				+ "e.g. Summer-" + currentYear + ".\n"
+				+ "Choose left or right way of numbering.\n"
+				+ "Enjoy your renamed collection of files!"); 
 		finalInfo.setTextAlignment(TextAlignment.CENTER);
 		
 		userInputField = new TextField();
 		userInputField.setMaxWidth(400);
-		userInputField.setPromptText("Enter your filename schema");
+		userInputField.setPromptText("Enter your filename schema..");
 		userInputField.setPrefColumnCount(15);   // maximum number of characters it can display at one time - doesn't work?
 		userInputField.getText();                // the text data entered by a user into the text fields can be obtained by the getText() 
 							

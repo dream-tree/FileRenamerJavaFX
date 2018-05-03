@@ -13,7 +13,6 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource("classpath:info.properties")
 public class BeanConfig {
 	
-	
 /*	@Bean(name="backgroundPic")
 	public Wallpaper setBackgroundImage() {
 		return new Wallpaper();
