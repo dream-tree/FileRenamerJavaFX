@@ -37,7 +37,7 @@ public class Wallpaper {
 	 * @return BackgroundImage object to be set as Background in the main window
 	 */
 	public BackgroundImage setWallpaper() {
-		Path path = FileSystems.getDefault().getPath("src/main/resources/wallpaper3d.jpg");			
+		Path path = FileSystems.getDefault().getPath("src/main/resources/wallpaper3e.jpg");			
 		FileInputStream inputstream = null;
 		try {
 			inputstream = new FileInputStream(path.toString());
