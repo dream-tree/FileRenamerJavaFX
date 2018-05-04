@@ -49,7 +49,7 @@ public class MenuView {
 		menuBar = new MenuBar();
 
 		menuUserInfo = new Menu("User info");
-		menuItemInfo = new MenuItem("Info");
+		menuItemInfo = new MenuItem("Read me");
 		menuItemExit = new MenuItem("Exit");
 		
 		menuAbout = new Menu("About");
@@ -58,11 +58,14 @@ public class MenuView {
 		menuExit = new Menu("Exit");
 		menuItemExitExit = new MenuItem("Exit");
 		
-		menuUserInfo.getItems().addAll(menuItemInfo, new SeparatorMenuItem(), menuExit);	
+		menuUserInfo.getItems().addAll(menuItemInfo, new SeparatorMenuItem(), menuItemExit);	
 		menuAbout.getItems().addAll(menuItemAbout);
 		menuExit.getItems().addAll(menuItemExitExit);
 		
-		return new MenuBar();
+		menuBar.setPrefSize(800.0, 30.0);
+		menuBar.getMenus().addAll(menuUserInfo, menuAbout, menuExit);	
+		
+		return menuBar;
 	}
 	
 	/**
@@ -70,9 +73,8 @@ public class MenuView {
 	 */
 	public void userInfoAlert() {
 		Alert alert = new Alert(AlertType.INFORMATION, "Content here", ButtonType.OK);
-		alert.getDialogPane().setPrefSize(550, 320);
-	//	alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-		alert.setX(StartApp.getPrimaryStage().getX() + 125);
+		alert.getDialogPane().setPrefSize(750, 420);
+		alert.setX(StartApp.getPrimaryStage().getX() + 25);
 		alert.setY(StartApp.getPrimaryStage().getY() + 100);
 		alert.setTitle("---User info---");	 
 		alert.setHeaderText(null);
@@ -85,6 +87,7 @@ public class MenuView {
 	 */
 	public void userAboutAlert() {
 		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.getDialogPane().setPrefSize(450, 170);
 		alert.setX(StartApp.getPrimaryStage().getX() + 200);
 		alert.setY(StartApp.getPrimaryStage().getY() + 200);
 		alert.setTitle("---About---");	 
@@ -140,5 +143,12 @@ public class MenuView {
 	 */
 	public Menu getMenuExitExit() {
 		return menuExit;
+	}
+
+	/**
+	 * @return the menuItemExitExit
+	 */
+	public MenuItem getMenuItemExitExit() {
+		return menuItemExitExit;
 	}
 }

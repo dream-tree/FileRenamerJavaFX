@@ -87,8 +87,6 @@ public class MainView {
 	 */
 	public void createContent(Scene scene) {			
 		MenuBar mb = menuBarView.addMenuBar();	
-		mb.setPrefSize(800.0, 30.0);
-		mb.getMenus().addAll(menuBarView.getMenuUserInfo(), menuBarView.getMenuAbout(), menuBarView.getMenuExit());	
 		
 		selectFilesButton = new Button("Search for files");
 		selectFilesButton.setPrefSize(150, 50);

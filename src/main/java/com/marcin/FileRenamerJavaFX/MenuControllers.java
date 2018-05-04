@@ -29,6 +29,6 @@ public class MenuControllers {
 		menuView.getMenuItemInfo().setOnAction(t -> menuView.userInfoAlert());		
 		menuView.getMenuItemExit().setOnAction(t -> System.exit(0));		
 		menuView.getMenuItemAbout().setOnAction(t -> menuView.userAboutAlert());		
-		menuView.getMenuItemExit().setOnAction(t -> System.exit(0));						
+		menuView.getMenuItemExitExit().setOnAction(t -> System.exit(0));						
 	}	
 }
