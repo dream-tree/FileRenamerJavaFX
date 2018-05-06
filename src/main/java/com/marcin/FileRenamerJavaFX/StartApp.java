@@ -7,7 +7,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.marcin.FileRenamerJavaFX.controllers.MainViewController;
 import com.marcin.FileRenamerJavaFX.controllers.MenuController;
 import com.marcin.FileRenamerJavaFX.controllers.ToggleController;
-import com.marcin.FileRenamerJavaFX.data.BeanConfig;
 import com.marcin.FileRenamerJavaFX.views.MainView;
 
 import javafx.application.Application;
