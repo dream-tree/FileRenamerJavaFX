@@ -51,13 +51,12 @@ public class MainView {
 	private AlertDialogs alerts;
 	@Autowired
 	private Wallpaper wallpaper;
-	@Value("${stage.Title}")
+	@Value("${stage.title}")
 	private String mainStageTitle;
 	
 	/**
 	 * Constructs the MainView.
-	 */
-	@Autowired                             
+	 */                           
 	public MainView() {
 		this.grid = new GridPane();	
 		grid.setPadding(new Insets(0, 0, 20, 0));
@@ -159,8 +158,7 @@ public class MainView {
 		GridPane.setHalignment(gridWithRadioButtons, HPos.CENTER);
 		GridPane.setHalignment(gridWithButtonDespription, HPos.CENTER); 
 		GridPane.setHalignment(renameButton, HPos.CENTER);
-		
-		
+				
 		grid.getChildren().addAll(mb, selectFilesButton, finalInfo, userInputField, gridWithRadioButtons, 
 				gridWithButtonDespription, renameButton);
 	}
@@ -196,7 +194,6 @@ public class MainView {
 		menuUserExit.setOnAction(t -> System.exit(0));		
 		menuUser.getItems().addAll(menuUserInfo, menuUserAbout, new SeparatorMenuItem(), menuUserExit);			
 				
-
 		menuBar.getMenus().addAll(menuUser, menuAbout, menuExit);	
 		
 		return menuBar;

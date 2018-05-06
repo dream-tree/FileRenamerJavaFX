@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 /**
- * General contract for selecting files for the renaming operation.
+ * General contract for the process of selecting files for the purpose of files renaming operation.
  * 
  * @author dream-tree
  * @version 1.00, April 2018

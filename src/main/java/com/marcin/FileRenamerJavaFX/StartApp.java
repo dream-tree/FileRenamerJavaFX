@@ -2,8 +2,6 @@ package com.marcin.FileRenamerJavaFX;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javafx.application.Application;
@@ -16,12 +14,12 @@ import javafx.stage.Stage;
  * This class also initializes Spring container 
  * and loads the beans necessary for the dependency injection.
  * 
- * Project uses "plain" Java code for GUI, JavaFX Scene Builder
+ * This project uses "plain" Java code for GUI building (for exercising purpose). JavaFX Scene Builder haven't been used.
+ * Project uses some basic Spring Framework features.
  * 
  * @author dream-tree
  * @version 1.00, April 2018
  */
-@SpringBootApplication
 public class StartApp extends Application {
 		
 	/**
@@ -29,15 +27,9 @@ public class StartApp extends Application {
 	 */
 	private static Stage primaryStage;
 	
-    @Override
-    public void init()
-    {
-    	SpringApplication.run(StartApp.class);
-    }
-	
 	public void start(Stage primaryStage) {
 		StartApp.primaryStage = primaryStage;
-/*		try {
+		try {
 			AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfig.class);
 			MainView view = context.getBean(MainView.class);		
 			view.initView(primaryStage);	
@@ -45,7 +37,7 @@ public class StartApp extends Application {
 			mainController.initMainController();	
 			ToggleController toggleController = context.getBean(ToggleController.class);
 			toggleController.initToggleController();
-			MenuControllers menuControllers = context.getBean(MenuControllers.class);
+			MenuController menuControllers = context.getBean(MenuController.class);
 			menuControllers.initMenuController();
 			context.close();
 			
@@ -54,7 +46,7 @@ public class StartApp extends Application {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	/**

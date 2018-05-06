@@ -1,11 +1,7 @@
 package com.marcin.FileRenamerJavaFX;
 
-import org.springframework.stereotype.Component;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SeparatorMenuItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 /**
  * Menu controllers for the application main view.
@@ -13,12 +9,13 @@ import javafx.scene.control.SeparatorMenuItem;
  * @author dream-tree
  * @version 1.00, April 2018
  */
-@Component
-public class MenuControllers {
+@Controller
+public class MenuController {
 	
 	private MenuView menuView;
 	
-	public MenuControllers(MenuView menuView) {
+	@Autowired
+	public MenuController(MenuView menuView) {
 		this.menuView = menuView;
 	}
 	

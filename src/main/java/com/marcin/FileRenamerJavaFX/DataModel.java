@@ -18,27 +18,41 @@ public class DataModel {
 	
 	@Autowired	
 	private FileLoader fileLoader;
+
+	/** 
+	 * List of files after the successful loading process made by {@link FileLoader} implementation class.
+	 */
 	private List<File> loadedFiles;
+	
+	/** 
+	 * List of files after the successful renaming process.
+	 * If user repeats the renaming process with the same set of files, he has not to load the files again.
+	 * In this scenario the loadedFiles array list stores the previously renamed files.
+	 * If user is going to rename another set of files in the same application life cycle,
+	 * the loadedFiles array must be cleared to prevent adding and accumulating old and new sets of files.
+	 * Clearing the loadedFiles array happens in {@link DataModel#processInput(String)}.
+	 */
 	private List<File> renamedFiles = new ArrayList<>();
 	
 	/**
-	 * One of 2 possible renaming options as detailed here: {@link ToggleController#initToggleController()} 
+	 * One of two possible renaming options as detailed here: {@link ToggleController#initToggleController()} 
 	 */
 	private int renamingOption = 0;
 	
 	/**
 	 * Indicates if the file renaming process was successful.
 	 */
-	boolean succeedFlag;
+	boolean isSuccessful;
 
 	/**
-	 * Constructs the DataModel.
+	 * Constructs the DataModel object.
 	 */
 	public DataModel() {
 	}
 	
 	/**
-	 * Checks out if the list of files chosen by user is not empty
+	 * Retrieves the list of files chosen by user, 
+	 * clears the loadedFiles array,
 	 * and redirects renaming process to the appropriate method using optionFlag variable.
 	 * @param input user schema for renaming selected files
 	 * @throws Exception exception in file renaming process
@@ -47,32 +61,28 @@ public class DataModel {
 	public boolean processInput(String input) throws RenamingException {
 		loadedFiles = fileLoader.getFilesList();
 		renamedFiles.clear();
-		if(loadedFiles != null) {
-			if(renamingOption == 0) {
-				succeedFlag = renameOption0(loadedFiles, input);
-				if(succeedFlag) {
-					refreshFilesList();	
-					return true;
-				} else {
-					throw new RenamingException("Error in renameOption0() method.");
-				}
-			} else if(renamingOption == 1) {
-				succeedFlag = renameOption1(loadedFiles, input);
-				if(succeedFlag) {
-					refreshFilesList();
-					return true;
-				} else {
-					throw new RenamingException("Error in renamingOption1() method.");
-				}
-			} 
-		 } else {
-				return false;
-		 }
-		return false;
+		if(renamingOption == 0) {
+			isSuccessful = renameOption0(loadedFiles, input);
+			if(isSuccessful) {
+				refreshFilesList();	
+				return true;
+			} else {
+				throw new RenamingException("Error in renamingOption0() method.", renamedFiles.size());
+			}
+		} else if(renamingOption == 1) {
+			isSuccessful = renameOption1(loadedFiles, input);
+			if(isSuccessful) {
+				refreshFilesList();
+				return true;
+			} else {
+				throw new RenamingException("Error in renamingOption1() method.", renamedFiles.size());
+			}
+		} 
+	return false;
 	}
 	
 	/**
-	 * Renames files in the way chosen by user i.e., numbering from the left hand side.
+	 * Renames files in the way chosen by user i.e., starts numbering from the left hand side.
 	 * @param filesList list of files selected by user for renaming process
 	 * @param input user schema for renaming selected files
 	 * @return true if renaming process was successful, false otherwise
@@ -91,22 +101,20 @@ public class DataModel {
 				sb.append(".");
 				sb.append(fileExtension[fileExtension.length-1]);
 				File s = new File(sb.toString());
-				succeedFlag = filesList.get(i).renameTo(s);
-				// if user wants to rename the same picture set in the same app session in the other way, 
-				// application has to remember recently filename changes
-				renamedFiles.add(s);
+				isSuccessful = filesList.get(i).renameTo(s);
+				if(isSuccessful) {
+					renamedFiles.add(s);
 				}
+			}
 		} catch (Exception e) { 
-			// TODO: logger - error in renaming files
-			// TODO ALERT
 			e.getMessage();
 			throw e;		
 		}
-	return succeedFlag;
+	return (renamedFiles.size()==loadedFiles.size() ? true : false);
 	}
 	
 	/**
-	 * Renames files in the way chosen by user i.e., numbering from the right hand side.
+	 * Renames files in the way chosen by user i.e., starts numbering from the right hand side.
 	 * @param filesList list of files selected by user for renaming process
 	 * @param input user schema for renaming selected files
 	 * @return true if renaming process was successful, false otherwise
@@ -117,7 +125,7 @@ public class DataModel {
 			for(int i = 0; i < filesList.size(); i++) {
 				String[] pathWithoutFileNameAndExt = filesList.get(i).toString().split("\\\\([^\\\\]+)$"); 
 				String[] pathWithoutFileExtension = filesList.get(i).toString().split("\\.([^\\.]+)$"); 
-				String[] fileExtension = filesList.get(i).toString().split("\\.");   // take last element in the array
+				String[] fileExtension = filesList.get(i).toString().split("\\.");   // takes last element in the array
 	
 				StringBuilder sb = new StringBuilder(pathWithoutFileNameAndExt[0]);
 				sb.append("\\").append(input).append("_");
@@ -125,32 +133,16 @@ public class DataModel {
 				sb.append(".");
 				sb.append(fileExtension[fileExtension.length-1]);
 				File s = new File(sb.toString());
-				succeedFlag = filesList.get(i).renameTo(s);
-				// if user wants to rename the same picture set in the same app session in the other way, 
-				// application has to remember recently filename changes
-				renamedFiles.add(s);
+				isSuccessful = filesList.get(i).renameTo(s);
+				if(isSuccessful) {
+					renamedFiles.add(s);
+				}
 			}
 		} catch (Exception e) { 
-			// TODO: logger - error in renaming files
-			// TODO: ALERT
 			e.getMessage();
 			throw e;		
 		}
-	return succeedFlag;
-	}
-
-/*	*//**
-	 * @return the optionFlag
-	 *//*
-	public int getRenamingOption() {
-		return renamingOption;
-	}*/
-
-	/**
-	 * @param optionFlag the optionFlag to set
-	 */
-	public void setRenamingOption(int optionFlag) {
-		this.renamingOption = optionFlag;
+	return (renamedFiles.size()==loadedFiles.size() ? true : false);
 	}
 	
 	/**
@@ -161,5 +153,12 @@ public class DataModel {
 	public void refreshFilesList() {
 		List<File> renamedFilesList = new ArrayList<>(renamedFiles);
 		fileLoader.updateFilesList(renamedFilesList);
+	}
+	
+	/**
+	 * @param optionFlag the optionFlag to set
+	 */
+	public void setRenamingOption(int optionFlag) {
+		this.renamingOption = optionFlag;
 	}
 }

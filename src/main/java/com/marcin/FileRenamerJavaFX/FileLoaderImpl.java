@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,7 +21,7 @@ import javafx.stage.FileChooser;
  * @author dream-tree
  * @version 1.00, April 2018
  */
-@Component
+@Repository
 public class FileLoaderImpl implements FileLoader {
 	
 	private List<File> filesList;
@@ -27,7 +29,6 @@ public class FileLoaderImpl implements FileLoader {
 	/** 
 	 * Constructs the FileLoaderImpl.
 	 */
-	@Autowired   
 	public FileLoaderImpl() {			
 	}
 		

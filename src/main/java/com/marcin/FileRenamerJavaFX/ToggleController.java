@@ -26,6 +26,7 @@ public class ToggleController {
 	* @param mainView the MainView instance
 	* @param model the DataModel instance
 	*/
+	@Autowired
 	public ToggleController(MainView mainView, DataModel model) {
 		this.mainView = mainView;
 		this.model = model;
@@ -40,7 +41,7 @@ public class ToggleController {
 	public void initToggleController() {
 		int[] position = new int[1];
 		mainView.getToggleGroup().selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-		    public void changed(ObservableValue<? extends Toggle> ov,Toggle old_toggle, Toggle new_toggle) {
+		    public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
 		            if(mainView.getToggleGroup().getSelectedToggle() != null) {
 		            	final int obt = position[0] = (int) mainView.getToggleGroup().getSelectedToggle().getUserData();
 		            	if(position[0] == 0) {

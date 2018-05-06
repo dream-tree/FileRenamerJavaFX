@@ -29,6 +29,7 @@ public class MainViewController {
 	* @param model the DataModel instance
 	* @param fileLoader the FileLoader type
 	*/
+	@Autowired
 	public MainViewController(MainView mainView, DataModel model, FileLoader fileLoader) {
 		this.mainView = mainView;
 		this.model = model;
@@ -36,7 +37,9 @@ public class MainViewController {
 	}
 	
 	/**
-	 * Initializes the controller for the application main view.
+	 * Initializes the controller for the application main view i.e.,
+	 * controller for rename button and
+	 * controller for search button.
 	 */
 	public void initMainController() {
 		
@@ -44,28 +47,29 @@ public class MainViewController {
 			@Override
 			public void handle(ActionEvent event) {
 				String input = mainView.getUserInputField().getText();
-				try {
-					filesList = fileLoader.getFilesList();
-				} catch (Exception e) {
-					// TODO: logger
-				}
+				filesList = fileLoader.getFilesList();
 				if(input == null || input.isEmpty()) {
 					mainView.getAlerts().noUserInputAlertDialog();
 				} else if(filesList == null || filesList.isEmpty()) {
 					mainView.getAlerts().noFileSelectedAlertDialog();
 				} else if(input.length() > 251) {
 					mainView.getAlerts().excededInputLengthAlertDialog();;
-				}
-				else {
+				} else {
 					try {
-						boolean succesFlag = model.processInput(input);
-						if(succesFlag) {
+						boolean successFlag = model.processInput(input);
+						if(successFlag) {
 							mainView.getAlerts().renamingSuccessAlertDialog(filesList.size());
 						}
 					} catch (RenamingException e) {
-						e.printStackTrace();     // NO NO NO!!! EXCEPTION MIXED WITH ALERT!!!
-						e.getMessage();
-						mainView.getAlerts().renamingErrorAlertDialog();
+						// assuming incorrect file name schema chosen by user (with unsupported characters)
+						if(e.getNumberOfRenamedFiles()==0) {
+							mainView.getAlerts().renamingErrorAlertDialog();
+							e.getMessage();
+						}
+						// unpredictable circumstances in the renaming process
+						else {
+							e.getMessage();
+						}
 					}
 				}
 			}

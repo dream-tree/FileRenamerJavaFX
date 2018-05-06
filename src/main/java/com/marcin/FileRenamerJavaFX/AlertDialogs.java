@@ -19,7 +19,6 @@ public class AlertDialogs {
 	/**
 	 * Constructs the AlertDialogs for all events in the application life-cycle.
 	 */
-	@Autowired
 	public AlertDialogs() {
 	}
 	
@@ -60,6 +59,14 @@ public class AlertDialogs {
         alert.setHeaderText(null);
         alert.setContentText("Invalid character, e.g. : or ?\n"
         		+ "No file was renamed.");	 
+        /*
+         * "No file was renamed" might not always be true: 
+         * if an error occurs during the renaming process and part of the files is renamed and part is not, this statement lies.
+         * By now, application doesn't provide a way to automatically bring back the previous file names 
+         * for partly renamed set of files (what is of course possible).
+         * But: this situation may happens only if some unpredicted circumstances occur during the renaming process. 
+         * This error should be announced by RenamingException handler.
+         */
         alert.showAndWait();
 	}
 	

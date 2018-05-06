@@ -28,7 +28,6 @@ public class Wallpaper {
 	/**
 	* Constructs the Wallpaper.
 	*/
-	@Autowired
 	public Wallpaper() {
 	}
 	
