@@ -1,4 +1,4 @@
-package com.marcin.FileRenamerJavaFX;
+package com.marcin.FileRenamerJavaFX.data;
 
 /**
  * Class supports error handling in the renaming process.

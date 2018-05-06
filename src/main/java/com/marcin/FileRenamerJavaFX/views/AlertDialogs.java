@@ -1,11 +1,11 @@
-package com.marcin.FileRenamerJavaFX;
+package com.marcin.FileRenamerJavaFX.views;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.marcin.FileRenamerJavaFX.StartApp;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.Stage;
 
 /**
  * Alert types for whole application.

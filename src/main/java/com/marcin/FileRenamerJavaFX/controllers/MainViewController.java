@@ -1,10 +1,15 @@
-package com.marcin.FileRenamerJavaFX;
+package com.marcin.FileRenamerJavaFX.controllers;
 
 import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.marcin.FileRenamerJavaFX.data.DataModel;
+import com.marcin.FileRenamerJavaFX.data.RenamingException;
+import com.marcin.FileRenamerJavaFX.repository.FileLoader;
+import com.marcin.FileRenamerJavaFX.views.MainView;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

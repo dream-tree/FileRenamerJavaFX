@@ -4,6 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.marcin.FileRenamerJavaFX.controllers.MainViewController;
+import com.marcin.FileRenamerJavaFX.controllers.MenuController;
+import com.marcin.FileRenamerJavaFX.controllers.ToggleController;
+import com.marcin.FileRenamerJavaFX.data.BeanConfig;
+import com.marcin.FileRenamerJavaFX.views.MainView;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,7 +20,7 @@ import javafx.stage.Stage;
  * This class also initializes Spring container 
  * and loads the beans necessary for the dependency injection.
  * 
- * This project uses "plain" Java code for GUI building (for exercising purpose). JavaFX Scene Builder haven't been used.
+ * This project uses "plain" Java code for GUI building (for exercising purposes). JavaFX Scene Builder haven't been used.
  * Project uses some basic Spring Framework features.
  * 
  * @author dream-tree

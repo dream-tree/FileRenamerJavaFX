@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.marcin.FileRenamerJavaFX.repository.FileLoader;
+import com.marcin.FileRenamerJavaFX.repository.FileLoaderImpl;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FileRenamerJavaFxApplicationTests {

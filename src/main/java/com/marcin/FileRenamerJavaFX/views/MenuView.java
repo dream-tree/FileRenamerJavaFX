@@ -1,7 +1,9 @@
-package com.marcin.FileRenamerJavaFX;
+package com.marcin.FileRenamerJavaFX.views;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.marcin.FileRenamerJavaFX.StartApp;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -10,7 +12,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
-import javafx.scene.layout.Region;
 
 /**
  * Class creates menu bar for the application main view.

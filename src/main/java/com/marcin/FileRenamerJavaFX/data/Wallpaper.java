@@ -1,20 +1,17 @@
-package com.marcin.FileRenamerJavaFX;
+package com.marcin.FileRenamerJavaFX.data;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.GridPane;
 
 /**
  * Initialization of background picture for the application main window.
@@ -41,7 +38,6 @@ public class Wallpaper {
 		try {
 			inputstream = new FileInputStream(path.toString());
 		} catch (FileNotFoundException e) {
-			// TODO: logger
 			e.printStackTrace();
 		} 
 		Image image = new Image(inputstream);

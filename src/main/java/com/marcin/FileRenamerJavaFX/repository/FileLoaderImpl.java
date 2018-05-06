@@ -1,17 +1,12 @@
-package com.marcin.FileRenamerJavaFX;
+package com.marcin.FileRenamerJavaFX.repository;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.marcin.FileRenamerJavaFX.StartApp;
+
 import javafx.stage.FileChooser;
 
 /**

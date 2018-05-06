@@ -1,7 +1,9 @@
-package com.marcin.FileRenamerJavaFX;
+package com.marcin.FileRenamerJavaFX.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.marcin.FileRenamerJavaFX.views.MenuView;
 
 /**
  * Menu controllers for the application main view.

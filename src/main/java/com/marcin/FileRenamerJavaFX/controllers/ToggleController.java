@@ -1,7 +1,10 @@
-package com.marcin.FileRenamerJavaFX;
+package com.marcin.FileRenamerJavaFX.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.marcin.FileRenamerJavaFX.data.DataModel;
+import com.marcin.FileRenamerJavaFX.views.MainView;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
