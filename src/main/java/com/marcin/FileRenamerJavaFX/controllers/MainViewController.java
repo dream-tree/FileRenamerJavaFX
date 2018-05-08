@@ -80,7 +80,7 @@ public class MainViewController {
 			}
 		});
 		
-		mainView.getSearchFilesButton().setOnAction(new EventHandler<ActionEvent>() {
+		mainView.getSelectFilesButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {	
 				fileLoader.loadFiles();

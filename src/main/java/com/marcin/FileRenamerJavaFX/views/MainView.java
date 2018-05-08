@@ -160,7 +160,7 @@ public class MainView {
 	/**
 	 * @return the searchFilesButton
 	 */
-	public Button getSearchFilesButton() {
+	public Button getSelectFilesButton() {
 		return selectFilesButton;
 	}
 
