@@ -138,13 +138,6 @@ public class MenuView {
 	public MenuItem getMenuItemAbout() {
 		return menuItemAbout;
 	}	
-	
-	/**
-	 * @return the menuExit
-	 */
-	public Menu getMenuExitExit() {
-		return menuExit;
-	}
 
 	/**
 	 * @return the menuItemExitExit
