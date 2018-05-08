@@ -6,24 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.marcin.FileRenamerJavaFX.StartApp;
 import com.marcin.FileRenamerJavaFX.data.Wallpaper;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Background;
@@ -53,6 +45,7 @@ public class MainView {
 	private AlertDialogs alerts;
 	@Autowired
 	private Wallpaper wallpaper;
+	
 	@Value("${stage.title}")
 	private String mainStageTitle;
 	
@@ -108,9 +101,8 @@ public class MainView {
 		
 		userInputField = new TextField();
 		userInputField.setMaxWidth(400);
-		userInputField.setPromptText("Enter your filename schema..");
-		userInputField.setPrefColumnCount(15);   // maximum number of characters it can display at one time - doesn't work?
-		userInputField.getText();                // the text data entered by a user into the text fields can be obtained by the getText() 
+		userInputField.setPromptText("Enter your filename schema.."); 
+		userInputField.getText();                
 							
 		GridPane gridWithRadioButtons = new GridPane();		
 		toggleGroup = new ToggleGroup();	
@@ -163,42 +155,6 @@ public class MainView {
 				
 		grid.getChildren().addAll(mb, selectFilesButton, finalInfo, userInputField, gridWithRadioButtons, 
 				gridWithButtonDespription, renameButton);
-	}
-
-	/**
-	 * Adding menu bar.
-	 * @return the menu bar for application main window
-	 */
-	public MenuBar addMenuBar() {		
-		MenuBar menuBar = new MenuBar();
-		menuBar.setPrefSize(800.0, 30.0);
-		final Menu menuUser = new Menu("User info");
-		final Menu menuAbout = new Menu("About");
-		final Menu menuExit = new Menu("Exit");
-		
-		MenuItem menuUserInfo = new MenuItem("User info");
-		menuUserInfo.setOnAction(new EventHandler<ActionEvent>() {
-		    @Override 
-		    public void handle(ActionEvent e) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setX(StartApp.getPrimaryStage().getX() + 200);
-				alert.setY(StartApp.getPrimaryStage().getY() + 200);
-		        alert.setTitle("---User info---");	 
-		        alert.setHeaderText(null);
-		        alert.setContentText("SUCCESS!");	 
-		        alert.showAndWait();
-		    }
-		});		
-		
-		MenuItem menuUserAbout = new MenuItem("About");
-		menuUserAbout.setOnAction(t -> System.out.println("unavailable"));		
-		MenuItem menuUserExit = new MenuItem("Exit");
-		menuUserExit.setOnAction(t -> System.exit(0));		
-		menuUser.getItems().addAll(menuUserInfo, menuUserAbout, new SeparatorMenuItem(), menuUserExit);			
-				
-		menuBar.getMenus().addAll(menuUser, menuAbout, menuExit);	
-		
-		return menuBar;
 	}
 	
 	/**

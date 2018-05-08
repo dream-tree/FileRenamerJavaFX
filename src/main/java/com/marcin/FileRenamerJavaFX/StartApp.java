@@ -1,7 +1,5 @@
 package com.marcin.FileRenamerJavaFX;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.marcin.FileRenamerJavaFX.controllers.MainViewController;
@@ -16,10 +14,11 @@ import javafx.stage.Stage;
  * Starting point of the FileRenamerJavaFX application.
  * It initializes the JavaFX platform start() method
  * and constructs the primary and the only Stage for the application.
- * This class also initializes Spring container 
+ * This class also initializes the Spring container 
  * and loads the beans necessary for the dependency injection.
  * 
- * This project uses "plain" Java code for GUI building (for exercising purposes). JavaFX Scene Builder haven't been used.
+ * This project uses "plain" Java code for GUI building (for exercising purposes). 
+ * JavaFX Scene Builder haven't been used.
  * Project uses some basic Spring Framework features.
  * 
  * @author dream-tree
@@ -45,9 +44,6 @@ public class StartApp extends Application {
 			MenuController menuControllers = context.getBean(MenuController.class);
 			menuControllers.initMenuController();
 			context.close();
-			
-			Logger logger = LoggerFactory.getLogger(StartApp.class);
-			logger.info("hello");
 			
 		} catch (Exception e) {
 			e.printStackTrace();

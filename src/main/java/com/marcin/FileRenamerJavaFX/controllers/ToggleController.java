@@ -46,7 +46,8 @@ public class ToggleController {
 		mainView.getToggleGroup().selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 		    public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
 		            if(mainView.getToggleGroup().getSelectedToggle() != null) {
-		            	final int obt = position[0] = (int) mainView.getToggleGroup().getSelectedToggle().getUserData();
+		            	@SuppressWarnings("unused")
+						final int obt = position[0] = (int) mainView.getToggleGroup().getSelectedToggle().getUserData();
 		            	if(position[0] == 0) {
 		            		model.setRenamingOption(0);
 		            	} else {

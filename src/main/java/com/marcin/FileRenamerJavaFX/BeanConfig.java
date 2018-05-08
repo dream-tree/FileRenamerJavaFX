@@ -28,5 +28,4 @@ public class BeanConfig {
 	public FileLoader loadFiles() {
 		return new FileLoaderImpl();
 	}*/
-
 }

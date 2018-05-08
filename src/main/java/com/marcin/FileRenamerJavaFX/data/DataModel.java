@@ -95,6 +95,7 @@ public class DataModel {
 		try {
 			for(int i = 0; i < filesList.size(); i++) {
 				String[] pathWithoutFileNameAndExt = filesList.get(i).toString().split("\\\\([^\\\\]+)$"); 
+				@SuppressWarnings("unused")
 				String[] pathWithoutFileExtension = filesList.get(i).toString().split("\\.([^\\.]+)$"); 
 				String[] fileExtension = filesList.get(i).toString().split("\\.");   // take last element in the array
 	
@@ -127,7 +128,6 @@ public class DataModel {
 		try {
 			for(int i = 0; i < filesList.size(); i++) {
 				String[] pathWithoutFileNameAndExt = filesList.get(i).toString().split("\\\\([^\\\\]+)$"); 
-				String[] pathWithoutFileExtension = filesList.get(i).toString().split("\\.([^\\.]+)$"); 
 				String[] fileExtension = filesList.get(i).toString().split("\\.");   // takes last element in the array
 	
 				StringBuilder sb = new StringBuilder(pathWithoutFileNameAndExt[0]);
