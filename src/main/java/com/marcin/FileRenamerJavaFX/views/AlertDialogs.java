@@ -29,10 +29,10 @@ public class AlertDialogs {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setX(StartApp.getPrimaryStage().getX() + 200);
 		alert.setY(StartApp.getPrimaryStage().getY() + 200);
-        alert.setTitle("ALERT: something went wrong..");	 
-        alert.setHeaderText(null);
-        alert.setContentText("You haven't typed anything!");	 
-        alert.showAndWait();
+		alert.setTitle("ALERT: something went wrong..");	 
+		alert.setHeaderText(null);
+		alert.setContentText("You haven't typed anything!");	 
+		alert.showAndWait();
 	}
 	
 	/**
@@ -42,10 +42,10 @@ public class AlertDialogs {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setX(StartApp.getPrimaryStage().getX() + 200);
 		alert.setY(StartApp.getPrimaryStage().getY() + 200);
-        alert.setTitle("ALERT: something went wrong..");	 
-        alert.setHeaderText(null);
-        alert.setContentText("You haven't selected any file!");	 
-        alert.showAndWait();
+		alert.setTitle("ALERT: something went wrong..");	 
+		alert.setHeaderText(null);
+		alert.setContentText("You haven't selected any file!");	 
+		alert.showAndWait();
 	}
 	
 	/**
@@ -55,16 +55,16 @@ public class AlertDialogs {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setX(StartApp.getPrimaryStage().getX() + 200);
 		alert.setY(StartApp.getPrimaryStage().getY() + 200);
-        alert.setTitle("ALERT: something went wrong..");	 
-        alert.setHeaderText(null);
-        alert.setContentText("Invalid character, e.g. : or ?\n"
+		alert.setTitle("ALERT: something went wrong..");	 
+		alert.setHeaderText(null);
+		alert.setContentText("Invalid character, e.g. : or ?\n"
         		+ "No file was renamed.");	 
         /*
          * "No file was renamed" might not always be true: 
          * if an error occurs during the renaming process and part of the files is renamed and part is not, this statement lies.
          * By now, application doesn't provide a way to automatically bring back the previous file names 
          * for partly renamed set of files (what is of course possible).
-         * But: this situation may happens only if some unpredicted circumstances occur during the renaming process. 
+         * But: this situation may happen only if some unpredicted circumstances occur during the renaming process. 
          * This error should be announced by RenamingException handler.
          */
         alert.showAndWait();
@@ -77,12 +77,12 @@ public class AlertDialogs {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setX(StartApp.getPrimaryStage().getX() + 200);
 		alert.setY(StartApp.getPrimaryStage().getY() + 200);
-        alert.setTitle("ALERT: something went wrong..");	 
-        alert.setHeaderText(null);
-        alert.setContentText("Exceeded length of your filename.\n"
-        		+ "Maximum length without numbering is 250.\n"
+		alert.setTitle("ALERT: something went wrong..");	 
+		alert.setHeaderText(null);
+		alert.setContentText("Filename length exceeded.\n"
+        		+ "Maximum length without numbering is 251.\n"
         		+ "No file was renamed.");	 
-        alert.showAndWait();
+		alert.showAndWait();
 	}	
 	
 	/**
@@ -92,10 +92,10 @@ public class AlertDialogs {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setX(StartApp.getPrimaryStage().getX() + 200);
 		alert.setY(StartApp.getPrimaryStage().getY() + 200);
-        alert.setTitle("Success in renaming files.");	 
-        alert.setHeaderText(null);
-        alert.setContentText(numberOfRenamedFiles==1 ? numberOfRenamedFiles + " file successfully renamed!" 
-        						: numberOfRenamedFiles + " files successfully renamed!");	 
-        alert.showAndWait();
+		alert.setTitle("Success in renaming files.");	 
+		alert.setHeaderText(null);
+		alert.setContentText(numberOfRenamedFiles==1 ? numberOfRenamedFiles + " file successfully renamed!" 
+				: numberOfRenamedFiles + " files successfully renamed!");	 
+		alert.showAndWait();
 	}	
 }
