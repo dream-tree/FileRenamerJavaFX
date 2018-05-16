@@ -11,7 +11,7 @@ import javafx.stage.FileChooser;
 
 /**
  * Class responsible for loading files chosen by user.
- * Files are selected using FileChoser dialog.
+ * Files are selected using the FileChooser dialog.
  * 
  * @author dream-tree
  * @version 1.00, April 2018
