@@ -6,6 +6,8 @@ FileRenamerJavaFX project is made with JavaFX technology and uses "plain" Java c
 
 It also uses some basic Spring Framework features (Spring Core) i.e, dependency injection (with annotation-based configuration).
 
+Project #004.
+
 ----
 
 TODO in the future releases:
