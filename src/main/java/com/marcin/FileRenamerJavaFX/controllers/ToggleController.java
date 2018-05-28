@@ -3,7 +3,7 @@ package com.marcin.FileRenamerJavaFX.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.marcin.FileRenamerJavaFX.data.DataModel;
+import com.marcin.FileRenamerJavaFX.data.FileRenamer;
 import com.marcin.FileRenamerJavaFX.views.MainView;
 
 import javafx.beans.value.ChangeListener;
@@ -22,7 +22,7 @@ import javafx.scene.control.Toggle;
 public class ToggleController {
 
 	private MainView mainView;
-	private DataModel model;
+	private FileRenamer fileRenamer;
 	
 	/**
 	* Constructs the ToggleController.
@@ -30,9 +30,9 @@ public class ToggleController {
 	* @param model the DataModel instance
 	*/
 	@Autowired
-	public ToggleController(MainView mainView, DataModel model) {
+	public ToggleController(MainView mainView, FileRenamer model) {
 		this.mainView = mainView;
-		this.model = model;
+		this.fileRenamer = model;
 	}
 	
 	/**
@@ -49,9 +49,9 @@ public class ToggleController {
 					@SuppressWarnings("unused")
 					final int obt = position[0] = (int) mainView.getToggleGroup().getSelectedToggle().getUserData();
 					if(position[0] == 0) {
-						model.setRenamingOption(0);
+						fileRenamer.setRenamingOption(0);
 					} else {
-						model.setRenamingOption(1);
+						fileRenamer.setRenamingOption(1);
 					}
 				}
 			}

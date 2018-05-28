@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.marcin.FileRenamerJavaFX.data.DataModel;
+import com.marcin.FileRenamerJavaFX.data.FileRenamer;
 import com.marcin.FileRenamerJavaFX.data.RenamingException;
 import com.marcin.FileRenamerJavaFX.repository.FileLoader;
 import com.marcin.FileRenamerJavaFX.views.MainView;
@@ -24,7 +24,7 @@ import javafx.event.EventHandler;
 public class MainViewController {
 	
 	private MainView mainView;
-	private DataModel model;
+	private FileRenamer fileRenamer;
 	private FileLoader fileLoader;
 	private List<File> filesList;
 	
@@ -35,9 +35,9 @@ public class MainViewController {
 	* @param fileLoader the FileLoader type
 	*/
 	@Autowired
-	public MainViewController(MainView mainView, DataModel model, FileLoader fileLoader) {
+	public MainViewController(MainView mainView, FileRenamer model, FileLoader fileLoader) {
 		this.mainView = mainView;
-		this.model = model;
+		this.fileRenamer = model;
 		this.fileLoader = fileLoader;
 	}
 	
@@ -61,7 +61,7 @@ public class MainViewController {
 					mainView.getAlerts().excededInputLengthAlertDialog();;
 				} else {
 					try {
-						boolean successFlag = model.processInput(input);
+						boolean successFlag = fileRenamer.processInput(input);
 						if(successFlag) {
 							mainView.getAlerts().renamingSuccessAlertDialog(filesList.size());
 						}

@@ -11,13 +11,13 @@ import com.marcin.FileRenamerJavaFX.controllers.ToggleController;
 import com.marcin.FileRenamerJavaFX.repository.FileLoader;
 
 /**
- * Data model for application.
+ * Class is responsible for the renaming process of loaded files.
  * 
  * @author dream-tree
  * @version 1.00, April 2018
  */
 @Service
-public class DataModel {
+public class FileRenamer {
 	
 	@Autowired	
 	private FileLoader fileLoader;
@@ -33,7 +33,7 @@ public class DataModel {
 	 * In this scenario the loadedFiles array list stores the previously renamed files.
 	 * If user is going to rename another set of files in the same application life cycle,
 	 * the loadedFiles array must be cleared to prevent adding and accumulating old and new sets of files.
-	 * Clearing the loadedFiles array happens in {@link DataModel#processInput(String)}.
+	 * Clearing the loadedFiles array happens in {@link FileRenamer#processInput(String)}.
 	 */
 	private List<File> renamedFiles = new ArrayList<>();
 	
@@ -48,15 +48,16 @@ public class DataModel {
 	boolean isSuccessful;
 
 	/**
-	 * Constructs the DataModel object.
+	 * Constructs the FileRenamer object.
 	 */
-	public DataModel() {
+	public FileRenamer() {
 	}
 	
 	/**
-	 * Retrieves the list of files chosen by user, 
-	 * clears the loadedFiles array,
+	 * Retrieves the list of files chosen by user 
 	 * and redirects renaming process to the appropriate method using optionFlag variable.
+	 * Before this main process, method clears the renamedFiles array, 
+	 * which might not be empty if the user made more then one renaming operation in one app session.
 	 * @param input user schema for renaming selected files
 	 * @throws Exception exception in file renaming process
 	 * @return true if renaming process was successful, false otherwise
